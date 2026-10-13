@@ -2,10 +2,8 @@ add_rules("mode.debug", "mode.release")
 
 add_repositories("levimc-repo https://github.com/LiteLDev/xmake-repo.git")
 
--- Change this to the LeviLamina version that matches your BDS / LeviLauncher game version.
-local LL_VERSION = "1.0.0"
-
-add_requires("levilamina " .. LL_VERSION, {configs = {target_type = "server"}})
+-- Let xmake automatically resolve the compatible LeviLamina version
+add_requires("levilamina", {configs = {target_type = "server"}})
 add_requires("levibuildscript")
 
 if not has_config("vs_runtime") then
