@@ -2,6 +2,8 @@ add_rules("mode.debug", "mode.release")
 
 add_repositories("levimc-repo https://github.com/LiteLDev/xmake-repo.git")
 
+-- Explicit package overrides to prevent unstable/broken archive tags from failing randomly
+add_requires("rapidjson v1.1.0")
 add_requires("levilamina")
 add_requires("levibuildscript")
 add_requires("preloader")
@@ -15,7 +17,7 @@ target("AxiomBuilder")
     add_rules("@levibuildscript/modpacker")
     add_cxflags("/EHa", "/utf-8", "/W4", "/w44265", "/w44289", "/w44296", "/w45263", "/w44738", "/w45204")
     add_defines("NOMINMAX", "UNICODE")
-    add_packages("levilamina", "preloader")
+    add_packages("levilamina", "preloader", "rapidjson")
     set_exceptions("none")
     set_kind("shared")
     set_languages("c++20")
