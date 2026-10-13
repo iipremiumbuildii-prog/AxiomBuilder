@@ -1,0 +1,8 @@
+{
+    "name": "AxiomBuilder",
+    "entry": "AxiomBuilder.dll",
+    "type": "native",
+    "version": "0.1.0",
+    "description": "In-game world editing: selections, fill/replace, brushes, undo/redo",
+    "author": "AxiomBuilder"
+}

@@ -1,0 +1,8 @@
+{
+    "name": "AxiomBuilder",
+    "entry": "AxiomBuilder.dll",
+    "type": "native",
+    "version": "1.0.0",
+    "description": "Axiom-style world building tools for Bedrock",
+    "author": "Jordan"
+}
