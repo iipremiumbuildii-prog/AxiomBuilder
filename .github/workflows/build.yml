@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
@@ -26,7 +24,7 @@ jobs:
           xmake repo --add liteldev-repo https://github.com/LiteLDev/xmake-repo.git
           xmake repo -u
           xmake f -m release -y
-          xmake -v -y
+          xmake -y
 
       - name: Upload Compiled DLL Artifact
         uses: actions/upload-artifact@v4
