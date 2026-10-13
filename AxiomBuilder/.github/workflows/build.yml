@@ -1,0 +1,30 @@
+name: Build Axiom Mod DLL
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+
+      - name: Configure and Compile
+        run: |
+          xmake f -m release -y
+          xmake
+
+      - name: Upload Compiled DLL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AxiomBuilder-DLL
+          path: build/windows/x64/release/*.dll
