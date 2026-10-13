@@ -2,12 +2,13 @@ add_rules("mode.debug", "mode.release")
 
 add_repositories("levimc-repo https://github.com/LiteLDev/xmake-repo.git")
 
-add_requires("levilamina")
+-- Pin a version that matches the API your code was written for, e.g. "1.7.0".
+-- target_type is required by newer LeviLamina releases.
+add_requires("levilamina", {configs = {target_type = "server"}})
 add_requires("levibuildscript")
-add_requires("preloader")
 
--- Force any transitive reference of rapidjson to use the stable v1.1.0 release instead of broken archives
-add_requireconfs("rapidjson", {version = "v1.1.0"})
+-- Force transitive rapidjson to v1.1.0 (override = true is required for this to take effect)
+add_requireconfs("**.rapidjson", {override = true, version = "v1.1.0"})
 
 if not has_config("vs_runtime") then
     set_runtimes("MD")
@@ -18,8 +19,8 @@ target("AxiomBuilder")
     add_rules("@levibuildscript/modpacker")
     add_cxflags("/EHa", "/utf-8", "/W4", "/w44265", "/w44289", "/w44296", "/w45263", "/w44738", "/w45204")
     add_defines("NOMINMAX", "UNICODE")
-    add_packages("levilamina", "preloader")
-    set_exceptions("none")
+    add_packages("levilamina")
+    set_exceptions("none") -- avoids conflict with /EHa
     set_kind("shared")
     set_languages("c++20")
     set_symbols("debug")
