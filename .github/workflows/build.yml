@@ -18,18 +18,26 @@ jobs:
         with:
           xmake-version: latest
 
-      - name: Configure and Compile
-        run: |
-          cd AxiomBuilder
-          xmake global --clean
-          xmake g --insecure-ssl=true
-          xmake repo --add levimc-repo https://github.com/LiteLDev/xmake-repo.git
-          xmake repo -u
-          xmake f -m release -y
-          xmake -y
+      - name: Cache xmake packages
+        uses: actions/cache@v4
+        with:
+          path: ~/AppData/Local/.xmake
+          key: xmake-${{ hashFiles('AxiomBuilder/xmake.lua') }}
+
+      - name: Update repos
+        working-directory: AxiomBuilder
+        run: xmake repo -u
+
+      - name: Configure
+        working-directory: AxiomBuilder
+        run: xmake f -a x64 -m release -p windows -v -y
+
+      - name: Compile
+        working-directory: AxiomBuilder
+        run: xmake -y -v
 
       - name: Upload Compiled DLL Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AxiomBuilder-DLL
-          path: AxiomBuilder/build/windows/x64/release/*.dll
+          path: AxiomBuilder/bin/AxiomBuilder/
