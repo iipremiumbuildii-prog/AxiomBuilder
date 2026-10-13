@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
@@ -21,9 +23,10 @@ jobs:
       - name: Configure and Compile
         run: |
           cd AxiomBuilder
-          xmake g --check=disabled
-          xmake f -m release -y --confirm=y
-          xmake -y --confirm=y
+          xmake repo --add liteldev-repo https://github.com/LiteLDev/xmake-repo.git
+          xmake repo -u
+          xmake f -m release -y
+          xmake -v -y
 
       - name: Upload Compiled DLL Artifact
         uses: actions/upload-artifact@v4
