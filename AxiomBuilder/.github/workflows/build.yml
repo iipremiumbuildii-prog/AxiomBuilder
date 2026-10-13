@@ -20,6 +20,7 @@ jobs:
 
       - name: Configure and Compile
         run: |
+          cd AxiomBuilder
           xmake f -m release -y
           xmake
 
@@ -27,4 +28,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: AxiomBuilder-DLL
-          path: build/windows/x64/release/*.dll
+          path: AxiomBuilder/build/windows/x64/release/*.dll
