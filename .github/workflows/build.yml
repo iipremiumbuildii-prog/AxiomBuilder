@@ -21,7 +21,8 @@ jobs:
       - name: Configure and Compile
         run: |
           cd AxiomBuilder
-          xmake repo --add liteldev-repo https://github.com/LiteLDev/xmake-repo.git
+          xmake g --insecure-ssl=true
+          xmake repo --add levimc-repo https://github.com/LiteLDev/xmake-repo.git
           xmake repo -u
           xmake f -m release -y
           xmake -y
