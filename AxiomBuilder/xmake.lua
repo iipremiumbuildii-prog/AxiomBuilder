@@ -2,9 +2,9 @@ add_rules("mode.debug", "mode.release")
 
 add_repositories("levimc-repo https://github.com/LiteLDev/xmake-repo.git")
 
--- Let xmake automatically resolve the compatible LeviLamina version
-add_requires("levilamina", {configs = {target_type = "server"}})
+add_requires("levilamina")
 add_requires("levibuildscript")
+add_requires("preloader")
 
 if not has_config("vs_runtime") then
     set_runtimes("MD")
@@ -15,7 +15,7 @@ target("AxiomBuilder")
     add_rules("@levibuildscript/modpacker")
     add_cxflags("/EHa", "/utf-8", "/W4", "/w44265", "/w44289", "/w44296", "/w45263", "/w44738", "/w45204")
     add_defines("NOMINMAX", "UNICODE")
-    add_packages("levilamina")
+    add_packages("levilamina", "preloader")
     set_exceptions("none")
     set_kind("shared")
     set_languages("c++20")
